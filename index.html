@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restart NGINX</title>
+</head>
+<body>
+<!-- setting page styles -->
+	<style>
+	div {border-radius: 30px;}
+	.green {color: #003300; background-color: #99ff99; padding: 2em;}
+	.red {color: #800000; background-color: #ff9999; padding: 2em; }
+	#alert {margin-top: 4em;width:auto; max-width: 60%; font-size: 11pt; font-weight:bold; padding: 2em; border-radius: 30px; }
+	body {background-color:#999; font-family: sans-serif;}
+	form {margin: auto;padding:2em;}
+	input {margin: 2em;}
+	.content {background-color:#999;color:#2a2a2a;font-size:14pt;width:40%;margin:auto;padding:2em;margin-top:2em;}
+	.click {background-color:#444;color:#999;padding:.5em;width:180px;height:80px;border-radius:30px;}
+	</style>
+<!-- end of page styles -->
+	<div class="content">	
+		<h3>Click to Restart Nginx</h3>
+		<p>this page has been created to allow for easy restarting of the NGINX server process whenever updates to the redirects have been made. </p>
+		<button class="click" id="reload" onClick="reload()">Reload NGINX</button>
+		<div id="alert"></div>
+	</div>
+<!-- javascript Start -->
+<script type="text/javascript">
+function reload() {
+	var http = new XMLHttpRequest();
+	http.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("alert").innerHTML = this.responseText;
+		}
+	}
+	http.open("POST","reload.php", true);
+	http.send();
+}
+</script>
+<!-- javascript end -->
+</body>
+</html>
